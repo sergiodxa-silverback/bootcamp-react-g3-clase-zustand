@@ -1,14 +1,16 @@
-import { useState } from "react";
+import { FC, useState } from "react";
 import { useNavigate } from "react-router-dom";
 
 import apiCall from '../api';
 import MealItem from "../components/MealItem";
 
-const Index = () => {
+const Index: FC<{}> = () => {
  const [searchText, setSearchText] = useState("");
  const [searchResults, setSearchResults] = useState([]);
  const [isLoading, setIsLoading] = useState(false);
- const [error, setError] = useState(null);
+ const [error, setError] = useState<any>(null);
+
+ console.log(searchResults);
 
  const navigate = useNavigate();
 
@@ -24,7 +26,7 @@ const Index = () => {
   }
  };
 
- const handleMealClick = (id) => {
+ const handleMealClick = (id: string) => {
   navigate(`/meal/${id}`);
  };
 

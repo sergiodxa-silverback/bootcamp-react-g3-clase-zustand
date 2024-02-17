@@ -1,13 +1,15 @@
-import { useEffect, useState } from "react";
+import { FC, useEffect, useState } from "react";
 import { useParams } from "react-router-dom";
 
 import apiCall from "../api";
 
-const Meal = () => {
+
+
+const Meal: FC<{}> = () => {
  const { id } = useParams();
- const [meal, setMeal] = useState({});
+ const [meal, setMeal] = useState<any>({});
  const [isLoading, setIsLoading] = useState(false);
- const [error, setError] = useState({});
+ const [error, setError] = useState<any>({});
 
 
  useEffect(() => {
@@ -15,7 +17,7 @@ const Meal = () => {
    try {
     setIsLoading(true);
     setError({});
-    setMeal({});
+    setMeal([]);
 
     const response = await apiCall(`/lookup.php?i=${id}`);
     setMeal(response?.meals?.[0]);
