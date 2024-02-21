@@ -1,29 +1,28 @@
 import { FC, useState } from "react";
 import { useNavigate } from "react-router-dom";
 
-import apiCall from '../api';
 import MealItem from "../components/MealItem";
+import useResultsStore from "../state/stores/results";
+import useUserInfoStore from "../state/stores/user-info";
 
 const Index: FC<{}> = () => {
+ const isLoading = useResultsStore((state) => state.isLoading);
+ const error = useResultsStore((state) => state.error);
+ const searchResults = useResultsStore((state) => state.searchResults);
+ const onSearchResults = useResultsStore((state) => state.onSearchResults);
+
+ const userInfo = useUserInfoStore((state) => state);
+ const updateLastSearch = useUserInfoStore((state) => state.updateLastSearch);
+
  const [searchText, setSearchText] = useState("");
- const [searchResults, setSearchResults] = useState([]);
- const [isLoading, setIsLoading] = useState(false);
- const [error, setError] = useState<any>(null);
 
- console.log(searchResults);
-
+ console.log(userInfo);
  const navigate = useNavigate();
 
  const handleSearchClick = async () => {
-  try {
-   setIsLoading(true);
-   const response = await apiCall(`/search.php?s=${searchText}`);
-   setSearchResults(response?.meals);
-  } catch (error) {
-   setError(error);
-  } finally {
-   setIsLoading(false);
-  }
+  onSearchResults(searchText);
+
+  updateLastSearch(searchText);
  };
 
  const handleMealClick = (id: string) => {

@@ -3,8 +3,7 @@ import { useParams } from "react-router-dom";
 
 import apiCall from "../api";
 
-
-
+// Migren a Zustand
 const Meal: FC<{}> = () => {
  const { id } = useParams();
  const [meal, setMeal] = useState<any>({});
