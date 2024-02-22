@@ -1,9 +1,10 @@
-export {}
+export {};
 
 declare global {
-    type Meal = {
-        strMeal: string;
-        strMealThumb: string;
-        strInstructions: string;
-    }
+  type Meal = {
+    idMeal: number;
+    strMeal: string;
+    strMealThumb: string;
+    strInstructions: string;
+  };
 }
